@@ -1,54 +1,59 @@
-// src/App.jsx
-import { useState, useRef, useMemo } from 'react' // <--- Added useMemo
+import { useState, useRef, useMemo } from 'react'
 import './App.css'
+
+// Music
+import monkeySound from './music/dancemonkey.mp3'
+import realSongSound from './music/mazaak.mp3'
+
+// Images
+import cat0 from './images/cutecat.png'
+import cat1 from './images/cat1.jpg'
+import cat2 from './images/thinkingcat.png'
+import cat3 from './images/catscared.png'
+import cat4 from './images/relievedcat.png'
+import cat5 from './images/cat2.jpeg'
+import cat6 from './images/flowercat.png'
+import heartImg from './images/pinkheart.png'
+import noteImg from './images/note.jpg'
 
 function App() {
   const [step, setStep] = useState(0);
   const [showNote, setShowNote] = useState(false); 
 
-  // TWO Audio Refs
-  const danceMonkeyRef = useRef(new Audio('music/dancemonkey.mp3')); 
-  const realSongRef = useRef(new Audio('music/mazaak.mp3'));      
+  // Use the imported sound variables
+  const danceMonkeyRef = useRef(new Audio(monkeySound)); 
+  const realSongRef = useRef(new Audio(realSongSound));      
 
   const messages = [
-    "Psst... Fifi.",                      // 0
-    "Yeah you. Cutie.",                   // 1
-    "Wait, let me get the music first...", // 2
-    "OH GOD WRONG SONG-",                 // 3 
-    "Okay... let's try that again.",      // 4
-    "I got you a little something.",      // 5
-    "Your favorites, my princess <3"      // 6 (Hearts trigger here)
+    "Psst... Fifi.",                      
+    "Yeah you. Cutie.",                   
+    "Wait, let me get the music first...", 
+    "OH GOD WRONG SONG-",                 
+    "Okay... let's try that again.",      
+    "I got you a little something.",      
+    "Your favorites, my princess <3"      
   ];
 
-  const catImages = [
-    "images/cutecat.png",       
-    "images/cat1.jpg",       
-    "images/thinkingcat.png",       
-    "images/catscared.png",    
-    "images/relievedcat.png",   
-    "images/cat2.jpeg",   
-    "images/flowercat.png"   
-  ];
+  const catImages = [cat0, cat1, cat2, cat3, cat4, cat5, cat6];
 
-  // Generate random hearts once so they don't reset when opening the note
   const hearts = useMemo(() => {
     return Array.from({ length: 40 }).map((_, i) => ({
       id: i,
-      left: Math.random() * 100,        // Random horizontal position (0-100%)
-      duration: 3 + Math.random() * 3,  // Random fall speed (3s to 6s)
-      delay: Math.random() * 5          // Random start delay
+      left: Math.random() * 100,        
+      duration: 3 + Math.random() * 3,  
+      delay: Math.random() * 5          
     }));
   }, []);
 
   const handleInteraction = () => {
     const nextStep = step + 1;
 
-    if (nextStep === 2) {
+    if (nextStep === 2) { 
       danceMonkeyRef.current.volume = 0.5;
       danceMonkeyRef.current.play().catch(e => console.log("Monkey failed:", e));
     }
 
-    if (nextStep === 4) {
+    if (nextStep === 4) { 
       danceMonkeyRef.current.pause();     
       danceMonkeyRef.current.currentTime = 0; 
       
@@ -65,14 +70,13 @@ function App() {
   return (
     <div className="container">
       
-      {/* FALLING HEARTS CONTAINER */}
-      {/* Only show on the final step (index 6) */}
+      {/* FALLING HEARTS */}
       {step === 6 && (
         <div className="hearts-container">
           {hearts.map((heart) => (
             <img 
               key={heart.id}
-              src="images/pinkheart.png" 
+              src={heartImg} 
               className="heart"
               style={{
                 left: `${heart.left}%`, 
@@ -113,7 +117,7 @@ function App() {
         <div className="note-overlay" onClick={() => setShowNote(false)}>
           <div className="note-content" onClick={(e) => e.stopPropagation()}>
             <img 
-              src="images/note.jpg" 
+              src={noteImg}
               alt="Handwritten note" 
               className="note-image"
             />
