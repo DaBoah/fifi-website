@@ -7,8 +7,8 @@ function App() {
   const [showNote, setShowNote] = useState(false); 
 
   // TWO Audio Refs
-  const danceMonkeyRef = useRef(new Audio('/music/dancemonkey.mp3')); 
-  const realSongRef = useRef(new Audio('/music/mazaak.mp3'));      
+  const danceMonkeyRef = useRef(new Audio('music/dancemonkey.mp3')); 
+  const realSongRef = useRef(new Audio('music/mazaak.mp3'));      
 
   const messages = [
     "Psst... Fifi.",                      // 0
@@ -21,13 +21,13 @@ function App() {
   ];
 
   const catImages = [
-    "/images/cutecat.png",       
-    "/images/cat1.jpg",       
-    "/images/thinkingcat.png",       
-    "/images/catscared.png",    
-    "/images/relievedcat.png",   
-    "/images/cat2.jpeg",   
-    "/images/flowercat.png"   
+    "images/cutecat.png",       
+    "images/cat1.jpg",       
+    "images/thinkingcat.png",       
+    "images/catscared.png",    
+    "images/relievedcat.png",   
+    "images/cat2.jpeg",   
+    "images/flowercat.png"   
   ];
 
   // Generate random hearts once so they don't reset when opening the note
@@ -43,7 +43,6 @@ function App() {
   const handleInteraction = () => {
     const nextStep = step + 1;
 
-    // --- MUSIC LOGIC ---
     if (nextStep === 2) {
       danceMonkeyRef.current.volume = 0.5;
       danceMonkeyRef.current.play().catch(e => console.log("Monkey failed:", e));
@@ -73,7 +72,7 @@ function App() {
           {hearts.map((heart) => (
             <img 
               key={heart.id}
-              src="/images/pinkheart.png" 
+              src="images/pinkheart.png" 
               className="heart"
               style={{
                 left: `${heart.left}%`, 
@@ -114,7 +113,7 @@ function App() {
         <div className="note-overlay" onClick={() => setShowNote(false)}>
           <div className="note-content" onClick={(e) => e.stopPropagation()}>
             <img 
-              src="/images/note.jpg" 
+              src="images/note.jpg" 
               alt="Handwritten note" 
               className="note-image"
             />
