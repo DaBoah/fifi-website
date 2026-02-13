@@ -13,7 +13,7 @@ function App() {
   const messages = [
     "Psst... Fifi.",                      // 0
     "Yeah you. Cutie.",                   // 1
-    "Wait, let me get the music goin...", // 2
+    "Wait, let me get the music first...", // 2
     "OH GOD WRONG SONG-",                 // 3 
     "Okay... let's try that again.",      // 4
     "I got you a little something.",      // 5
