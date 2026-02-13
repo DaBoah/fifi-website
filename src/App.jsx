@@ -1,5 +1,5 @@
 // src/App.jsx
-import { useState, useRef } from 'react'
+import { useState, useRef, useMemo } from 'react' // <--- Added useMemo
 import './App.css'
 
 function App() {
@@ -11,28 +11,39 @@ function App() {
   const realSongRef = useRef(new Audio('/music/mazaak.mp3'));      
 
   const messages = [
-    "Psst... Fifi.",                      // Step 0
-    "Yeah you. Cutie.",                   // Step 1
-    "Wait, let me get the music goin...", // Step 2 (Dance monkey plays)
-    "OH GOD WRONG SONG-",             // Step 3 
-    "Okay... let's try that again.",   // Step 4 (Real song starts)
-    "I got you a little something.",      // Step 5
-    "Your favorites, my princess <3"      // Step 6 (Flowers appear)
+    "Psst... Fifi.",                      // 0
+    "Yeah you. Cutie.",                   // 1
+    "Wait, let me get the music goin...", // 2
+    "OH GOD WRONG SONG-",                 // 3 
+    "Okay... let's try that again.",      // 4
+    "I got you a little something.",      // 5
+    "Your favorites, my princess <3"      // 6 (Hearts trigger here)
   ];
 
   const catImages = [
-    "/images/cutecat.png",       // Normal
-    "/images/cat1.jpg",       // Cute/Happy
-    "/images/thinkingcat.png",       // Focused 
-    "/images/catscared.png",    // SHOCKED CAT 
-    "/images/relievedcat.png",   // Relieved
-    "/images/cat2.jpeg",   // Cute again
-    "/images/flowercat.png"   // The Final Flower Cat
+    "/images/cutecat.png",       
+    "/images/cat1.jpg",       
+    "/images/thinkingcat.png",       
+    "/images/catscared.png",    
+    "/images/relievedcat.png",   
+    "/images/cat2.jpeg",   
+    "/images/flowercat.png"   
   ];
+
+  // Generate random hearts once so they don't reset when opening the note
+  const hearts = useMemo(() => {
+    return Array.from({ length: 40 }).map((_, i) => ({
+      id: i,
+      left: Math.random() * 100,        // Random horizontal position (0-100%)
+      duration: 3 + Math.random() * 3,  // Random fall speed (3s to 6s)
+      delay: Math.random() * 5          // Random start delay
+    }));
+  }, []);
 
   const handleInteraction = () => {
     const nextStep = step + 1;
 
+    // --- MUSIC LOGIC ---
     if (nextStep === 2) {
       danceMonkeyRef.current.volume = 0.5;
       danceMonkeyRef.current.play().catch(e => console.log("Monkey failed:", e));
@@ -55,6 +66,26 @@ function App() {
   return (
     <div className="container">
       
+      {/* FALLING HEARTS CONTAINER */}
+      {/* Only show on the final step (index 6) */}
+      {step === 6 && (
+        <div className="hearts-container">
+          {hearts.map((heart) => (
+            <img 
+              key={heart.id}
+              src="/images/pinkheart.png" 
+              className="heart"
+              style={{
+                left: `${heart.left}%`, 
+                animationDuration: `${heart.duration}s`,
+                animationDelay: `${heart.delay}s`
+              }}
+              alt=""
+            />
+          ))}
+        </div>
+      )}
+
       <div className={`main-content ${showNote ? 'blur-background' : ''}`}>
         
         <div className="chat-bubble" onClick={handleInteraction}>
