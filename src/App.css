@@ -21,43 +21,42 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh; /* Full mobile screen height */
+  height: 100vh; 
   text-align: center;
   padding: 20px;
 }
 
-/* The Cat Image styling */
+
 .cat-image {
-  width: 300px; /* Good size for mobile */
+  width: 300px; 
   height: auto;
-  border-radius: 10px; /* Soft edges */
+  border-radius: 10px; 
   cursor: pointer;
-  transition: transform 0.1s; /* Slight bounce on click */
+  transition: transform 0.1s; 
 }
 
 .cat-image:active {
   transform: scale(0.98);
 }
 
-/* The Chat Bubble styling */
+
 .chat-bubble {
   background-color: white;
   color: black;
   padding: 15px 20px;
   border-radius: 20px;
-  margin-bottom: 20px; /* Space between bubble and cat */
+  margin-bottom: 20px; 
   position: relative;
-  font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif; /* Playful font */
+  font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif; 
   max-width: 80%;
   box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
   animation: popIn 0.3s ease-out;
 }
 
-/* Little triangle at the bottom of the bubble */
 .chat-bubble::after {
   content: '';
   position: absolute;
-  bottom: -10px; /* Hangs below */
+  bottom: -10px; 
   left: 50%;
   transform: translateX(-50%);
   border-width: 10px 10px 0;
@@ -69,34 +68,31 @@ body {
   position: relative; 
 }
 
-/* The dark background - Forces it to cover the SCREEN, not just the div */
 .note-overlay {
-  position: fixed; /* Fixed to the browser window */
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100vw; /* 100% of viewport width */
-  height: 100vh; /* 100% of viewport height */
-  background: rgba(0, 0, 0, 0.85); /* Darker background */
+  width: 100vw;
+  height: 100vh; 
+  background: rgba(0, 0, 0, 0.85); 
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999; /* Higher than everything else */
-  backdrop-filter: blur(5px); /* This adds a blur to the background natively */
+  z-index: 9999; 
+  backdrop-filter: blur(5px); 
 }
 
-/* The Note Card itself */
 .note-content {
   position: relative;
   background: transparent;
   max-width: 90%;
-  max-height: 80%; /* Keeps it from being too tall */
+  max-height: 80%; 
   display: flex;
   flex-direction: column;
   align-items: center;
   animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* The Image within the note */
 .note-image {
   max-width: 100%;
   max-height: 60vh; 

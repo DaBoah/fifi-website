@@ -7,8 +7,8 @@ function App() {
   const [showNote, setShowNote] = useState(false); 
 
   // TWO Audio Refs
-  const danceMonkeyRef = useRef(new Audio('/music/dancemonkey.mp3')); // The joke song
-  const realSongRef = useRef(new Audio('/music/mazaak.mp3'));      // The real song
+  const danceMonkeyRef = useRef(new Audio('/music/dancemonkey.mp3')); 
+  const realSongRef = useRef(new Audio('/music/mazaak.mp3'));      
 
   const messages = [
     "Psst... Fifi.",                      // Step 0
@@ -31,28 +31,22 @@ function App() {
   ];
 
   const handleInteraction = () => {
-    // We update step first, then check what logic to run for the NEW step
     const nextStep = step + 1;
-    
-    // --- MUSIC LOGIC ---
-    
-    // Trigger 1: The Fake Out (When moving TO Step 3)
+
     if (nextStep === 2) {
       danceMonkeyRef.current.volume = 0.5;
       danceMonkeyRef.current.play().catch(e => console.log("Monkey failed:", e));
     }
 
-    // Trigger 2: The Fix (When moving TO Step 4)
     if (nextStep === 4) {
-      danceMonkeyRef.current.pause();       // Kill the monkey
-      danceMonkeyRef.current.currentTime = 0; // Reset it
+      danceMonkeyRef.current.pause();     
+      danceMonkeyRef.current.currentTime = 0; 
       
-      realSongRef.current.volume = 0.4;     // Start the real vibes
+      realSongRef.current.volume = 0.4;    
       realSongRef.current.loop = true;
       realSongRef.current.play().catch(e => console.log("Real song failed:", e));
     }
 
-    // Advance the conversation (unless we are at the end)
     if (step < messages.length - 1) {
       setStep(nextStep);
     }
