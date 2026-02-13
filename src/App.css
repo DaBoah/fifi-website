@@ -1,0 +1,122 @@
+/* src/App.css */
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+}
+
+body {
+  background-color: #000; /* Black background */
+  color: white;
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Full mobile screen height */
+  text-align: center;
+  padding: 20px;
+}
+
+/* The Cat Image styling */
+.cat-image {
+  width: 300px; /* Good size for mobile */
+  height: auto;
+  border-radius: 10px; /* Soft edges */
+  cursor: pointer;
+  transition: transform 0.1s; /* Slight bounce on click */
+}
+
+.cat-image:active {
+  transform: scale(0.98);
+}
+
+/* The Chat Bubble styling */
+.chat-bubble {
+  background-color: white;
+  color: black;
+  padding: 15px 20px;
+  border-radius: 20px;
+  margin-bottom: 20px; /* Space between bubble and cat */
+  position: relative;
+  font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif; /* Playful font */
+  max-width: 80%;
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+  animation: popIn 0.3s ease-out;
+}
+
+/* Little triangle at the bottom of the bubble */
+.chat-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -10px; /* Hangs below */
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 10px 10px 0;
+  border-style: solid;
+  border-color: white transparent transparent transparent;
+}
+
+.container {
+  position: relative; 
+}
+
+/* The dark background - Forces it to cover the SCREEN, not just the div */
+.note-overlay {
+  position: fixed; /* Fixed to the browser window */
+  top: 0;
+  left: 0;
+  width: 100vw; /* 100% of viewport width */
+  height: 100vh; /* 100% of viewport height */
+  background: rgba(0, 0, 0, 0.85); /* Darker background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Higher than everything else */
+  backdrop-filter: blur(5px); /* This adds a blur to the background natively */
+}
+
+/* The Note Card itself */
+.note-content {
+  position: relative;
+  background: transparent;
+  max-width: 90%;
+  max-height: 80%; /* Keeps it from being too tall */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* The Image within the note */
+.note-image {
+  max-width: 100%;
+  max-height: 60vh; 
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.close-btn {
+  margin-top: 20px;
+  padding: 10px 30px;
+  background: white;
+  color: black;
+  border: none;
+  border-radius: 50px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+@keyframes popIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
